@@ -1,12 +1,21 @@
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import '../src/components/menuBar'
-import DashboardLayoutBasic from '../src/components/menuBar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import SignIn from './pages/signin';
+
 
 function App() {
   return (
     <div className="App">
-      <DashboardLayoutBasic/>
+      <Router>
+        
+        <Routes>
+          <Route path="/" element={<SignIn />} />
+          <Route path="/home" element={<HomePage />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
