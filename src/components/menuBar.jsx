@@ -1,30 +1,47 @@
 import * as React from 'react';
 import { extendTheme, styled } from '@mui/material/styles';
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import BarChartIcon from '@mui/icons-material/BarChart';
-import DescriptionIcon from '@mui/icons-material/Description';
-import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Grid from '@mui/material/Grid2';
 
+//  Icons
+import HeadphonesIcon from '@mui/icons-material/Headphones';
+import HomeIcon from '@mui/icons-material/Home';
+import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
+import SpatialAudioOffIcon from '@mui/icons-material/SpatialAudioOff';
+import BarChartIcon from '@mui/icons-material/BarChart';
+import DescriptionIcon from '@mui/icons-material/Description';
+import LayersIcon from '@mui/icons-material/Layers';
+
+// IMG
+import Logo from "../utils/images/icon.png";
+
 const NAVIGATION = [
   {
     kind: 'header',
-    title: 'Main items',
+    title: 'Menu navigation',
   },
   {
-    segment: 'dashboard',
-    title: 'Dashboard',
-    icon: <DashboardIcon />,
+    segment: 'home',
+    title: 'Home',
+    icon: <HomeIcon/>,
   },
   {
-    segment: 'orders',
-    title: 'Orders',
-    icon: <ShoppingCartIcon />,
+    segment: 'playlist',
+    title: 'My Playlist',
+    icon: <PlaylistPlayIcon />,
   },
+  {
+    segment: 'music',
+    title: 'Music ',
+    icon: <HeadphonesIcon />,
+  },
+  {
+    segment: 'Artist',
+    title: 'Artist',
+    icon: <SpatialAudioOffIcon />,
+  }, 
   {
     kind: 'divider',
   },
@@ -94,7 +111,7 @@ const Skeleton = styled('div')(({ theme, height }) => ({
 export default function DashboardLayoutBasic(props) {
   const { window } = props;
 
-  const router = useDemoRouter('/dashboard');
+  const router = useDemoRouter('/home');
 
   // Remove this const when copying and pasting into your project.
   const demoWindow = window ? window() : undefined;
