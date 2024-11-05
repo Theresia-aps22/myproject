@@ -1,0 +1,21 @@
+{
+    "headers": {
+      "status": "success",
+      "code": 0,
+      "error_message": "",
+      "warnings": "",
+      "results_count": 5
+    },
+    "results": [
+      {
+        "id": "1356489",
+        "name": "Jazz in Paris",
+        "artist_id": "4321",
+        "artist_name": "Media Right Productions",
+        "album_name": "Jazz & Blues",
+        "audio": "https://mp3d.jamendo.com/?trackid=1356489&format=mp31",
+        "duration": 135
+      }
+    ]
+  }
+  
