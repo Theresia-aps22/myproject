@@ -4,6 +4,7 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 import Grid from '@mui/material/Grid2';
+import Avatar from '@mui/material/Avatar';
 
 //  Icons
 import HeadphonesIcon from '@mui/icons-material/Headphones';
@@ -13,9 +14,10 @@ import SpatialAudioOffIcon from '@mui/icons-material/SpatialAudioOff';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import DescriptionIcon from '@mui/icons-material/Description';
 import LayersIcon from '@mui/icons-material/Layers';
+import MoodIcon from '@mui/icons-material/Mood';
 
 // IMG
-import Logo from "../utils/images/icon.png";
+import Logo from "../utils/images/icon_e-haino.png";
 
 const NAVIGATION = [
   {
@@ -122,8 +124,14 @@ export default function DashboardLayoutBasic(props) {
       router={router}
       theme={demoTheme}
       window={demoWindow}
+      branding={{
+        logo: <img src={Logo} alt="E-HAINO" />,
+        title: 'E-HAINO',
+      }}
     >
-      <DashboardLayout>
+      <DashboardLayout
+        logo={Logo}
+      >
         <PageContainer>
           <Grid container spacing={1}>
             <Grid size={5} />
