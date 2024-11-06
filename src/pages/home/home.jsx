@@ -1,11 +1,25 @@
+// HomePage.js
 import * as React from 'react';
-import Typography from '@mui/material/Typography';
+import { Container, Typography } from '@mui/material';
+import { styled } from '@mui/system';
+import CategorySection from '../../components/Category/categorySection';
+import MusicCardListForm from '../../components/Music/musicList';
+
+const StyledContainer = styled(Container)(({ theme }) => ({
+  marginTop: theme.spacing(4),
+  textAlign: 'center',
+}));
 
 export default function HomePage() {
   return (
-    <>
-        <Typography variant="h4">Welcome to a page in the dashboard!</Typography>
-        {/* Assurez-vous que le titre "Home" n'est pas dupliqué ici */}
-    </>
-  )
+    <StyledContainer>
+      <Typography variant="h4" gutterBottom>Welcome to E-HAINO Music!</Typography>
+      <Typography variant="subtitle1" color="textSecondary">
+        Discover your favorite music genres and artists!
+      </Typography>
+
+      <CategorySection /> 
+      <MusicCardListForm/>
+    </StyledContainer>
+  );
 }
