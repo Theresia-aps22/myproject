@@ -38,7 +38,7 @@ export default function SignUpPage() {
 
   return (
     <AppProvider theme={theme}>
-      <Container className='container' maxWidth="sm">
+      <Container className='container' maxWidth="xs">
         <Typography className='title-Sign' variant="h4" gutterBottom>
           Sign Up
         </Typography>
