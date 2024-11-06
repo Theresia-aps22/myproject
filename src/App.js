@@ -3,8 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
-import SignIn from './pages/Signin';
-import SignUp from './pages/Signup';
+import SignIn from './pages/auth/Signin';
+import SignUp from './pages/auth/Signup';
 
 
 function App() {

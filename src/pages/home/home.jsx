@@ -4,6 +4,7 @@ import { Container, Typography } from '@mui/material';
 import { styled } from '@mui/system';
 import CategorySection from '../../components/Category/categorySection';
 import MusicCardListForm from '../../components/Music/musicList';
+import MusicCard from '../../components/Music/musicCard';
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(4),
@@ -19,7 +20,7 @@ export default function HomePage() {
       </Typography>
 
       <CategorySection /> 
-      <MusicCardListForm/>
+      <MusicCard/>
     </StyledContainer>
   );
 }

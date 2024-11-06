@@ -8,22 +8,44 @@ export default function MusicCardListForm() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);  // Alterne entre lecture et pause
+    setIsPlaying(!isPlaying);
+  };
+
+  // Styles séparés
+  const cardStyle = {
+    display: "flex",
+    alignItems: "center",
+    padding: "16px",
+    height: "90px",
+  };
+
+  const imageStyle = {
+    width: 60,
+    height: 80,
+    marginRight: 16,
+  };
+
+  const textStyle = {
+    flexGrow: 1,
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   };
 
   return (
-    <Card sx={{ display: "flex", justifyContent: "space-between", padding: "16px", paddingY: "16px", alignItems: "center" }}>
-      {/* Image */}
-      <img src={album_photo} alt="Album cover" style={{ width: 80, height: 80, marginRight: 16 }} />
-      
-      <div>
+    <Card sx={cardStyle}>
+      {/* Image à gauche */}
+      <img src={album_photo} alt="Album cover" style={imageStyle} />
+
+      {/* Texte au centre */}
+      <div style={textStyle}>
         <span>Titre</span>
-        <br />
         <span>Artist name</span>
       </div>
 
-      <IconButton onClick={handlePlayPause} sx={{ alignSelf: "center" }}>
-        {isPlaying ? <PauseIcon /> : <PlayArrowIcon />} {/* Change l'icône en fonction de l'état */}
+      {/* Bouton Play/Pause à droite */}
+      <IconButton onClick={handlePlayPause}>
+        {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
       </IconButton>
     </Card>
   );

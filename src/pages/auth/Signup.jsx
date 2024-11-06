@@ -3,8 +3,7 @@ import { AppProvider } from '@toolpad/core/AppProvider';
 import { useTheme } from '@mui/material/styles';
 import { Button, TextField, Typography, Container } from '@mui/material';
 import { Link } from 'react-router-dom';
-import '../styles/sign.css';
-
+import '../../utils/styles/sign.css';
 // Fonction pour simuler l'inscription
 const signUp = async (formData) => {
   const promise = new Promise((resolve) => {
@@ -41,10 +40,28 @@ export default function SignUpPage() {
     <AppProvider theme={theme}>
       <Container className='container' maxWidth="sm">
         <Typography className='title-Sign' variant="h4" gutterBottom>
-          Sign in
+          Sign Up
         </Typography>
         <p className='introduction'>Welcome,to your music's world</p>
         <form onSubmit={handleSubmit}>
+          <TextField
+            label="Name"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+          <TextField
+            label="Surname"
+            variant="outlined"
+            fullWidth
+            margin="normal"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
           <TextField
             label="Email"
             variant="outlined"
@@ -65,9 +82,9 @@ export default function SignUpPage() {
             required
           />
           <Button type="submit" fullWidth variant="contained" color="primary">
-            Sign In
+            Sign Up
           </Button>
-          <p className="">Don't have any account? <Link className='link' to="/signup">Sign Up</Link></p>
+          <p className="">Already have an account? <Link className='link' to="/">Sign In</Link></p>
         </form>
       </Container>
     </AppProvider>
