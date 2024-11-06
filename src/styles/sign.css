@@ -1,3 +1,17 @@
 .container{
-    margin-top: 5%;
+    margin-top: 3%;
+    padding: 2%;
+    background-color: white;
+    border-radius: 5%;
+    box-shadow: 1px 1px 5px 5px rgb(243, 221, 240);
+}
+
+.title-Sign{
+    color: blueviolet;
+}
+.introduction{
+    color: rgb(170, 79, 255);
+}
+.link{
+    text-decoration: none;
 }

@@ -40,9 +40,10 @@ export default function SignUpPage() {
   return (
     <AppProvider theme={theme}>
       <Container className='container' maxWidth="sm">
-        <Typography variant="h4" gutterBottom>
+        <Typography className='title-Sign' variant="h4" gutterBottom>
           Sign in
         </Typography>
+        <p className='introduction'>Welcome,to your music's world</p>
         <form onSubmit={handleSubmit}>
           <TextField
             label="Email"
@@ -63,10 +64,10 @@ export default function SignUpPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" fullWidth variant="contained" color="primary">
             Sign In
           </Button>
-          <p className="">Don't have any account?<Link to="/signup">Sign Up</Link></p>
+          <p className="">Don't have any account? <Link className='link' to="/signup">Sign Up</Link></p>
         </form>
       </Container>
     </AppProvider>
