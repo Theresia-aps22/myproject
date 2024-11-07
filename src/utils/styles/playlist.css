@@ -1,0 +1,17 @@
+.card{
+  margin-left: 100%;
+  width: 300px;
+  height: 50px;
+  background-color: rgb(72, 87, 87);
+  border-radius: 5px;
+}
+.card:hover{
+  background-color:rgb(95, 112, 112) ;
+}
+.link-playlist{
+  font-size: 25px;
+  text-decoration: none;
+}
+.addIcon{
+  margin-top: 10px;
+}

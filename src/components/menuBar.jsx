@@ -10,6 +10,9 @@ import Logo from "../utils/images/icon_e-haino.png";
 // Page
 import HomePage from '../pages/home/home';
 import MusicPage from '../pages/music/music';
+import PlaylistPage from '../pages/playlist/myplaylist';
+import ArtistPage from '../pages/artist/artist';
+
 
 import NAVIGATION from '../config/config';
 
@@ -59,6 +62,8 @@ export default function DashboardLayoutBasic(props) {
           <Grid container spacing={2}>
             {router.pathname === '/home' && <HomePage />}
             {router.pathname === '/music' && <MusicPage />}
+            {router.pathname === '/playlist' && <PlaylistPage />}
+            {router.pathname === '/Artist' && <ArtistPage />}
           </Grid>
       </DashboardLayout>
     </AppProvider>
