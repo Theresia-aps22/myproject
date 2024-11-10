@@ -20,7 +20,7 @@ export default function HomePage() {
       </Typography>
 
       <CategorySection /> 
-      <MusicCard/>
+      <MusicCardListForm/>
     </StyledContainer>
   );
 }
