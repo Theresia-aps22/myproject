@@ -18,9 +18,8 @@ export default function HomePage() {
       <Typography variant="subtitle1" color="textSecondary">
         Discover your favorite music genres and artists!
       </Typography>
-
       <CategorySection /> 
-      <MusicCard/>
+      <MusicCardListForm/>
     </StyledContainer>
   );
 }

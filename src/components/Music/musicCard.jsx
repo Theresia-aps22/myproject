@@ -1,51 +1,71 @@
 import * as React from 'react';
-import { useTheme } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import IconButton from '@mui/material/IconButton';
+import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import CardMedia from '@mui/material/CardMedia';
+
+import LOGO from "../../utils/images/classic.jpg";
 
 export default function MusicCard() {
-  const theme = useTheme();
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(false);
+
+  const handlePlayPause = () => {
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleFavoriteToggle = () => {
+    setIsFavorite(!isFavorite);
+  };
 
   return (
-    <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            Live From Space
-          </Typography>
-          <Typography
-            variant="subtitle1"
-            component="div"
-            sx={{ color: 'text.secondary' }}
-          >
-            Mac Miller
-          </Typography>
-        </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-          <IconButton aria-label="previous">
-            {theme.direction === 'rtl' ? <SkipNextIcon /> : <SkipPreviousIcon />}
-          </IconButton>
-          <IconButton aria-label="play/pause">
-            <PlayArrowIcon sx={{ height: 38, width: 38 }} />
-          </IconButton>
-          <IconButton aria-label="next">
-            {theme.direction === 'rtl' ? <SkipPreviousIcon /> : <SkipNextIcon />}
-          </IconButton>
-        </Box>
-      </Box>
+    <Box
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        backgroundColor: 'gray', 
+        borderRadius: '5px',
+        color: 'black',
+        p: 1,
+        width: '100%',
+        mb: 1,
+      }}
+    >
       <CardMedia
         component="img"
-        sx={{ width: 151 }}
-        image="/static/images/cards/live-from-space.jpg"
-        alt="Live from space album cover"
+        sx={{
+          width: 40,
+          height: 50,
+          borderRadius: 1,
+          mr: 1,
+        }}
+        image={LOGO}
+        alt="Album cover"
       />
-    </Card>
+      <Box sx={{ flex: 1, overflow: 'hidden' }}>
+        <Typography
+          variant="body2"
+          noWrap
+          sx={{
+            fontWeight: 'bold',
+          }}
+        >
+          Clearest Blue (Gryffin Remix)
+        </Typography>
+        <Typography variant="caption" color="text.secondary" noWrap>
+          CHVRCHES
+        </Typography>
+      </Box>
+      <IconButton onClick={handlePlayPause} sx={{ color: 'white' }}>
+        {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
+      </IconButton>
+      <IconButton onClick={handleFavoriteToggle} sx={{ color: isFavorite ? 'red' : 'white' }}>
+        {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+      </IconButton>
+    </Box>
   );
 }

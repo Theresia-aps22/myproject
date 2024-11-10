@@ -1,52 +1,75 @@
-import { Card, IconButton } from "@mui/material";
-import album_photo from "../../utils/images/rock.png";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import PauseIcon from "@mui/icons-material/Pause";
-import { useState } from "react";
+import React from "react";
+import { Container, Box, Card, Typography } from "@mui/material";
+import MusicCard from "./musicCard";
 
 export default function MusicCardListForm() {
-  const [isPlaying, setIsPlaying] = useState(false);
-
-  const handlePlayPause = () => {
-    setIsPlaying(!isPlaying);
-  };
-
-  // Styles séparés
-  const cardStyle = {
-    display: "flex",
-    alignItems: "center",
-    padding: "16px",
-    height: "90px",
-  };
-
-  const imageStyle = {
-    width: 60,
-    height: 80,
-    marginRight: 16,
-  };
-
-  const textStyle = {
-    flexGrow: 1,
+  // Styles pour les cartes
+  const cardContainerStyle = {
     display: "flex",
     flexDirection: "column",
-    justifyContent: "center",
+    gap: "10px",
+    padding: "16px",
+    backgroundColor: "linear-gradient(145deg, #ffffff, #e6e6e6)", // Dégradé subtil
+    borderRadius: "16px", // Coins arrondis pour un design moderne
+    boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Ombre douce
   };
 
   return (
-    <Card sx={cardStyle}>
-      {/* Image à gauche */}
-      <img src={album_photo} alt="Album cover" style={imageStyle} />
+    <Container
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        mt: 4,
+        backgroundColor: "#fff0", // Fond sombre
+        padding: "32px",
+        borderRadius: "12px",
+        boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)", // Ombre autour du conteneur principal
+      }}
+    >
+      <Typography
+        variant="h4"
+        sx={{
+          mb: 4,
+          color: "#ff6b6b", // Couleur accentuée
+          fontWeight: "bold",
+          textAlign: "center",
+          textShadow: "0 4px 8px rgba(0, 0, 0, 0.5)", // Ombre pour le titre
+        }}
+      >
+        Music Library
+      </Typography>
+      <Box sx={{ display: "flex", gap: 4, width: "100%", justifyContent: "center" }}>
+        {/* Première colonne */}
+        <Box sx={{ flex: 1 }}>
+          {/* <Typography
+            variant="h6"
+            sx={{
+              mb: 2,
+              color: "#FFD700", // Couleur dorée pour un look premium
+              textAlign: "center",
+              fontWeight: "bold",
+              textTransform: "uppercase",
+            }}
+          >
+            Playlist 1
+          </Typography> */}
+          <Card>
+            <MusicCard />
+            <MusicCard />
+            <MusicCard />
+          </Card>
+        </Box>
 
-      {/* Texte au centre */}
-      <div style={textStyle}>
-        <span>Titre</span>
-        <span>Artist name</span>
-      </div>
-
-      {/* Bouton Play/Pause à droite */}
-      <IconButton onClick={handlePlayPause}>
-        {isPlaying ? <PauseIcon /> : <PlayArrowIcon />}
-      </IconButton>
-    </Card>
+        {/* Deuxième colonne */}
+        <Box sx={{ flex: 1 }}>
+          <Card>
+            <MusicCard />
+            <MusicCard />
+            <MusicCard />
+          </Card>
+        </Box>
+      </Box>
+    </Container>
   );
 }
