@@ -1,10 +1,10 @@
 // HomePage.js
 import * as React from 'react';
-import { Container, Typography } from '@mui/material';
+import { Container, Typography, Card } from '@mui/material';
 import { styled } from '@mui/system';
-import CategorySection from '../../components/Category/categorySection';
-import MusicCardListForm from '../../components/Music/musicList';
-import MusicCard from '../../components/Music/musicCard';
+import SongCards from  '../../components/RecentPLay/recentPlayCard.jsx'
+
+import Illustration from '../../utils/images/music_illustration.png'
 
 const StyledContainer = styled(Container)(({ theme }) => ({
   marginTop: theme.spacing(4),
@@ -18,8 +18,10 @@ export default function HomePage() {
       <Typography variant="subtitle1" color="textSecondary">
         Discover your favorite music genres and artists!
       </Typography>
-      <CategorySection /> 
-      <MusicCardListForm/>
+      <Card>
+        <img alt="Music" src={Illustration} width="30%"/>
+      </Card>
+      <SongCards/>
     </StyledContainer>
   );
 }

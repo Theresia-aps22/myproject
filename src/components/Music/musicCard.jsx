@@ -6,6 +6,8 @@ import PauseIcon from '@mui/icons-material/Pause';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
 import CardMedia from '@mui/material/CardMedia';
 
 import LOGO from "../../utils/images/classic.jpg";
@@ -13,6 +15,7 @@ import LOGO from "../../utils/images/classic.jpg";
 export default function MusicCard() {
   const [isPlaying, setIsPlaying] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
+  const [isSaved, setIsSaved] = React.useState(false);
 
   const handlePlayPause = () => {
     setIsPlaying(!isPlaying);
@@ -22,12 +25,16 @@ export default function MusicCard() {
     setIsFavorite(!isFavorite);
   };
 
+  const handleSaveToggle = () => {
+    setIsSaved(!isSaved);
+  };
+
   return (
     <Box
       sx={{
         display: 'flex',
         alignItems: 'center',
-        backgroundColor: 'gray', 
+        backgroundColor: '#c496c4', 
         borderRadius: '5px',
         color: 'black',
         p: 1,
@@ -65,6 +72,9 @@ export default function MusicCard() {
       </IconButton>
       <IconButton onClick={handleFavoriteToggle} sx={{ color: isFavorite ? 'red' : 'white' }}>
         {isFavorite ? <FavoriteIcon /> : <FavoriteBorderIcon />}
+      </IconButton>
+      <IconButton onClick={handleSaveToggle} sx={{ color: isSaved ? 'yellow' : 'white' }}>
+        {isSaved ? <BookmarkIcon /> : <BookmarkBorderIcon />}
       </IconButton>
     </Box>
   );
