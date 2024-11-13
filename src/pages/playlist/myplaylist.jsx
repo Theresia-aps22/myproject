@@ -1,53 +1,97 @@
-import React, { useState, useEffect } from 'react';
-import { fetchTopTracks } from '../playlist/utils/fetchers'; // Assurez-vous que cette fonction prend en charge la récupération des chansons
+import React, { useState } from 'react';
+import AddIcon from '@mui/icons-material/Add';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import LibraryMusicIcon from '@mui/icons-material/LibraryMusic';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { Link } from 'react-router-dom';
 import '../../utils/styles/playlist.css';
 
 export default function TrackList() {
-  const [tracks, setTracks] = useState([]); // Pour stocker les chansons récupérées
-  const [loading, setLoading] = useState(true); // Pour afficher le loading
-  const [error, setError] = useState(null);     // Pour gérer les erreurs
+  const [showPopup, setShowPopup] = useState(false);
+  const [playlistName, setPlaylistName] = useState('');
+  const [playlists, setPlaylists] = useState([]);
+  const [showMenuIndex, setShowMenuIndex] = useState(null);
 
-  useEffect(() => {
-    const loadTracks = async () => {
-      try {
-        // Limite à 20 chansons, vous pouvez ajuster ce nombre
-        const data = await fetchTopTracks(40);
-        setTracks(data);
-      } catch (err) {
-        setError('Erreur lors de la récupération des chansons');
-      } finally {
-        setLoading(false);
-      }
-    };
+  const openPopup = () => setShowPopup(true);
+  const closePopup = () => setShowPopup(false);
 
-    loadTracks();
-  }, []);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setPlaylists([...playlists, playlistName]);
+    setPlaylistName('');
+    closePopup();
+  };
 
-  if (loading) return <div>Chargement des chansons...</div>;
-  if (error) return <div>{error}</div>;
+  const toggleMenu = (index) => {
+    setShowMenuIndex(showMenuIndex === index ? null : index);
+  };
 
   return (
-    <div>
-      <h1>Toutes les Chansons</h1>
-      <div className="tracks-container">
-        {tracks.length > 0 ? (
-          tracks.map((track) => (
-            <div key={track.id} className="track-item">
-              <img src={track.picture_small} alt={track.title} className="track-image" />
-              <div className="track-info">
-                <p>{track.name}</p>
-                <p>{track.artist_name}</p>
-                <audio controls onCanPlayThrough={() => console.log("Audio ready to play")}>
-                  <source src={track.audio} type="audio/mp3" />
-                  Votre navigateur ne prend pas en charge le lecteur audio.
-                </audio>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div>Aucune chanson disponible</div>
-        )}
+    <div className='playlist-container'>
+      <h1 className='playlist-title'><LibraryMusicIcon/> My Playlist</h1>
+
+      <div className="create-playlist">
+        <button className="btn create-playlist-btn" onClick={openPopup}>
+          Create Playlist
+          <AddIcon className="addicon" />
+        </button>
       </div>
+
+      <Link to="/liked" className="track-section-card">
+        <h2><FavoriteBorderIcon /> Liked Songs</h2><br />
+        <p>9 available songs</p>
+      </Link>
+
+      <Link to="/saved" className="track-section-card">
+        <h2><BookmarkBorderIcon/> Saved Songs</h2><br />
+        <p>8 available songs</p>
+      </Link>
+
+      {playlists.map((name, index) => (
+        <Link to={`/playlist/${index}?name=${encodeURIComponent(name)}`} key={index} className="track-section-card">
+          <div className="card-header">
+            <h2><MusicNoteIcon /> {name}</h2>
+            <button className='delete-btn' onClick={(e) => { e.preventDefault(); toggleMenu(index); }}>
+              <MoreVertIcon />
+            </button>
+          </div>
+          <p>Newly created playlist</p>
+
+          {showMenuIndex === index && (
+            <div className="context-menu">
+              <p onClick={() => console.log("Edit clicked")}>Edit</p>
+              <p onClick={() => console.log("Delete clicked")}>Delete</p>
+            </div>
+          )}
+        </Link>
+))}
+
+
+      {showPopup && (
+        <div className="popup-overlay" onClick={closePopup}>
+          <div className="track-section-card popup-content" onClick={(e) => e.stopPropagation()}>
+            <h3><LibraryMusicIcon/> Create Playlist</h3>
+            <form onSubmit={handleSubmit}>
+              <label className='popup-label'>
+                Playlist Name:
+                <input
+                  type="text"
+                  value={playlistName}
+                  onChange={(e) => setPlaylistName(e.target.value)}
+                  required
+                  className="popup-input"
+                />
+              </label>
+              <div>
+                <button type="submit" className="btn">Create</button>
+                <button type="button" className="btn" onClick={closePopup}>Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

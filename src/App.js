@@ -5,7 +5,10 @@
   import HomePage from './pages/HomePage';
   import SignIn from './pages/auth/Signin';
   import SignUp from './pages/auth/Signup';
+  import LikedSong from './pages/song/LikedSong.jsx';
   import ArtistDetails from './pages/artist/artistsDetails.jsx';
+  import SavedSong from './pages/song/SavedSong.jsx';
+import NewSong from './pages/song/NewSong.jsx';
 
 
   function App() {
@@ -17,7 +20,10 @@
             <Route path="/" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="/home" element={<HomePage />} />
+            <Route path="/liked" element={<LikedSong />} />
+            <Route path="/saved" element={<SavedSong />} />
             <Route path="/artist/:artistId" element={<ArtistDetails />} />
+            <Route path="/playlist/:playlistId" element={<NewSong />} />
 
 
           </Routes>

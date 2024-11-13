@@ -51,12 +51,12 @@ export default function Artist() {
               {/* Lien vers la page de l'artiste */}
               <Link className="link-artist" to={`/artist/${artist.id}`}>
                 <p className="artist">{artist.name}</p>
-                <p>{artist.trackCount} chansons disponibles</p> {/* Affichage du nombre de chansons */}
+                <p>{artist.trackCount} available songs</p> {/* Affichage du nombre de chansons */}
               </Link>
             </div>
           ))
         ) : (
-          <div>Aucun artiste trouvé.</div>
+          <div>No artists found.</div>
         )}
       </div>
     </div>

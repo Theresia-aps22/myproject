@@ -1,17 +1,180 @@
-.card{
-  margin-left: 100%;
-  width: 300px;
-  height: 50px;
-  background-color: rgb(72, 87, 87);
-  border-radius: 5px;
+.playlist-container{
+  width: 100%;
 }
-.card:hover{
-  background-color:rgb(95, 112, 112) ;
+.playlist-title {
+  text-align: center;  /* Centrer le titre horizontalement */
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: violet;
+  display: block;      /* Assurez-vous que l'élément prend toute la largeur */
+  margin-left: auto;   /* Centrer l'élément horizontalement */
+  margin-right: auto;  /* Assurez-vous qu'il est centré */
 }
-.link-playlist{
-  font-size: 25px;
+
+/* Autres styles restent inchangés */
+
+.addicon{
+  font-size: 30px;
+  margin-left: 10px;
+}
+
+/* Style de base pour tous les boutons */
+.btn {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+.create-playlist{
+  width: 70%;
+  padding-left:30%;
+}
+/* Bouton pour la création de playlist */
+.create-playlist-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Centre l’icône et le texte verticalement */
+  gap: 8px;
+  padding: 10px 15px;
+  padding-left: 80px;
+  width: 100%;
+  font-size: 30px;
   text-decoration: none;
+  background-color: #313031;
+  color: rgb(214, 83, 226);
+  transition: background-color 0.3s;
+  cursor: pointer;
 }
-.addIcon{
-  margin-top: 10px;
+
+.create-playlist-btn:hover {
+  background-color: #4b4a4b;
+}
+
+/* Style pour les cartes */
+.track-section-card {
+  display: inline-flex;
+  flex-direction:column;
+  align-items: center;
+  background-color: #94a7bb;
+  border: 1px solid #ddd;
+  color: rgb(88, 8, 88);
+  padding: 20px;
+  margin: 20px ;
+  text-decoration: none;
+  width: 30%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Centrer le titre des cartes */
+.track-section-card h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  text-align: center;  /* Centrer le texte dans les cartes */
+}
+
+.track-section-card p {
+  font-weight: lighter;
+  text-align: center;  /* Centrer le texte des descriptions */
+}
+/*Style  pour le bouton*/
+.delete-btn{
+  background: transparent;
+  border:0px;
+  color:rgb(88, 8, 88);
+  cursor: pointer;
+}
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%; /* S'assurer que le contenu occupe toute la largeur */
+}
+
+/* Style pour le conteneur du pop-up */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fond semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding-left: 20%;
+}
+
+
+/* Contenu du pop-up */
+.popup-title{
+  color: rgb(88, 8, 88);
+}
+.popup-label{
+  color: rgb(15, 0, 15);
+  font-size: 20px;
+}
+.popup-content {
+  background-color: rgb(176, 119, 223);
+  padding: 20px;
+  border-radius: 8px;
+  width: 30%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Formulaire dans le pop-up */
+.popup-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.popup-content input {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid #a63baa;
+}
+
+/* Boutons dans le pop-up */
+.popup-content button {
+  padding: 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popup-content button:hover {
+  background-color: #b0c2b0;
+  color: #3a053b;
+}
+/* Menu contextuel */
+.context-menu {
+  position: absolute;
+  top: 25%;
+  right: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 100;
+}
+.context-menu p {
+  margin: 0;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.context-menu p:hover {
+  background-color: #f0f0f0;
 }
