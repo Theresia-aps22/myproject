@@ -3,6 +3,8 @@ import { extendTheme} from '@mui/material/styles';
 import { AppProvider } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import Grid from '@mui/material/Grid2';
+import Avatar from '@mui/material/Avatar';
+
 
 // IMG
 import Logo from "../utils/images/icon_e-haino.png";
@@ -12,9 +14,13 @@ import HomePage from '../pages/home/home';
 import MusicPage from '../pages/music/music';
 import PlaylistPage from '../pages/playlist/myplaylist';
 import ArtistPage from '../pages/artist/artist';
+import ArtistDashboard from './MusicChart/chart'
+import Profile from '../pages/profile/viewProfile'
+import ArtistProfile from '../components/ArtistCard/profile.jsx';
 
 
 import NAVIGATION from '../config/config';
+import avatarImage from '../utils/images/classic.jpg';
 
 
 const demoTheme = extendTheme({
@@ -56,6 +62,11 @@ export default function DashboardLayoutBasic(props) {
       branding={{
         logo: <img src={Logo} alt="E-HAINO" />,
         title: 'E-HAINO',
+        avatar:<Avatar
+          alt="User Avatar"
+          src={avatarImage}
+          sx={{ width: 30, height: 30, ml: 0 }}
+        />
       }}
     >
       <DashboardLayout>
@@ -64,6 +75,9 @@ export default function DashboardLayoutBasic(props) {
             {router.pathname === '/music' && <MusicPage />}
             {router.pathname === '/playlist' && <PlaylistPage />}
             {router.pathname === '/Artist' && <ArtistPage />}
+            {router.pathname ==='/dashboard' && <ArtistDashboard/>}
+            {router.pathname === '/profile/view' && <Profile/>}
+            {router.pathname === '/artist/profile/view' && <Profile/>}
           </Grid>
       </DashboardLayout>
     </AppProvider>

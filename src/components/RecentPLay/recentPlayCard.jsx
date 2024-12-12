@@ -1,19 +1,30 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
+import ArtistCard from '../ArtistCard'
 import MusicCard from "../Music/musicCard";
-import LOGO from "../../utils/images/classic.jpg";
+import Image from "../../utils/images/classic.jpg";
+import Button from '@mui/material/Button';
+
 
 const artists = [
-  { name: 'Artist 1', image: LOGO },
-  { name: 'Artist 2', image: LOGO },
+  { name: 'Artiste 1', image:Image, followers: '5k' },
+  { name: 'Artiste 2', image: Image, followers: '10k' },
+  { name: 'Artiste 2', image: Image, followers: '10k' },
+  { name: 'Artiste 2', image: Image, followers: '10k' },
+  { name: 'Artiste 2', image: Image, followers: '10k' },
+  { name: 'Artiste 2', image: Image, followers: '10k' },
+  { name: 'Artiste 2', image: Image, followers: '10k' },
+  { name: 'Artiste 2', image: Image, followers: '10k' },
 ];
+
+
 
 export default function SongCards() {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, p: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3}}>
       <RecentlyPlayedCard />
       <FollowedArtistsCard artists={artists} />
       <FavoriteSongsCard />
@@ -21,36 +32,65 @@ export default function SongCards() {
   );
 }
 
-function RecentlyPlayedCard() {
+const cardStyleArtist = {
+  // maxWidth: '800px',
+  margin: '0 auto',
+  padding: '16px',
+  boxShadow: 3,
+  borderRadius: 2,
+};
+
+const titleStyleArtist = {
+  textAlign: 'center',
+  marginBottom: '16px',
+};
+
+
+function FollowedArtistsCard({ artists }) {
+  const [visibleArtistsCount, setVisibleArtistsCount] = useState(5);
+
+  const handleShowMore = () => {
+    setVisibleArtistsCount(prevCount => prevCount + 10); // Augmente par 10 à chaque clic
+  };
+
+  const handleShowLess = () => {
+    setVisibleArtistsCount(prevCount => Math.max(prevCount - 10, 5)); // Diminue par 10, mais ne descend pas en dessous de 5
+  };
+
   return (
-    <Card sx={cardStyle}>
+    <Card sx={cardStyleArtist}>
       <CardContent>
         <Typography variant="h6" gutterBottom sx={titleStyle}>
-          🎧 Chansons récemment écoutées
+          ⭐ Artistes suivis
         </Typography>
-        <MusicCard />
-        <MusicCard />
-        <MusicCard />
-        <MusicCard />
+        <Box
+          sx={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '16px',
+            justifyContent: 'center',
+          }}
+        >
+          {artists.slice(0, visibleArtistsCount).map((artist, index) => (
+            <ArtistCard key={index} artist={artist} />
+          ))}
+        </Box>
+        <Box sx={{ textAlign: 'center', marginTop: '16px' }}>
+          {visibleArtistsCount < artists.length ? (
+            <Button variant="contained" color="primary" onClick={handleShowMore}>
+              Voir plus
+            </Button>
+          ) : (
+            <Button variant="outlined" color="secondary" onClick={handleShowLess}>
+              Voir moins
+            </Button>
+          )}
+        </Box>
       </CardContent>
     </Card>
   );
 }
 
-function FollowedArtistsCard({ artists }) {
-  return (
-    <Card sx={cardStyle}>
-      <CardContent>
-        <Typography variant="h6" gutterBottom sx={titleStyle}>
-          ⭐ Artistes suivis
-        </Typography>
-        {artists.map((artist, index) => (
-          <MusicCard key={index} />
-        ))}
-      </CardContent>
-    </Card>
-  );
-}
 
 function FavoriteSongsCard() {
   return (
@@ -91,3 +131,20 @@ const titleStyle = {
   paddingBottom: '4px',
   marginBottom: '12px',
 };
+
+function RecentlyPlayedCard() {
+  return (
+    <Card sx={cardStyle}>
+      <CardContent>
+        <Typography variant="h6" gutterBottom sx={titleStyle}>
+          🎧 Chansons récemment écoutées
+        </Typography>
+        <MusicCard />
+        <MusicCard />
+        <MusicCard />
+        <MusicCard />
+      </CardContent>
+    </Card>
+  );
+}
+

@@ -48,22 +48,22 @@ export default function ArtistDashboard() {
   return (
     <Box sx={{ p: 4, backgroundColor: '#f9f9fb', minHeight: '100vh' }}>
       <Typography variant="h4" sx={{ mb: 4, fontWeight: 'bold', color: '#333' }}>
-        Dashboard d'Écoutes de l'Artiste
+        Dashboard
       </Typography>
       
       <Grid container spacing={3}>
         {/* Compteurs pour les écoutes */}
         <Grid item xs={12} md={3}>
-          <StatsCard title="Écoutes aujourd'hui" value={listensSummary.daily} />
+          <StatsCard title="Listen today" value={listensSummary.daily} />
         </Grid>
         <Grid item xs={12} md={3}>
-          <StatsCard title="Écoutes cette semaine" value={listensSummary.weekly} />
+          <StatsCard title="Listen this week" value={listensSummary.weekly} />
         </Grid>
         <Grid item xs={12} md={3}>
-          <StatsCard title="Écoutes ce mois-ci" value={listensSummary.monthly} />
+          <StatsCard title="Listen this month" value={listensSummary.monthly} />
         </Grid>
         <Grid item xs={12} md={3}>
-          <StatsCard title="Total d'écoutes" value={listensSummary.total} />
+          <StatsCard title="Listen Total" value={listensSummary.total} />
         </Grid>
 
         {/* Graphique pour les écoutes mensuelles */}
@@ -71,7 +71,7 @@ export default function ArtistDashboard() {
           <Card sx={{ borderRadius: '12px', boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)' }}>
             <CardContent>
               <Typography variant="h6" gutterBottom sx={{ fontWeight: 'bold', color: '#333' }}>
-                Évolution Mensuelle des Écoutes
+                Evolution
               </Typography>
               <Line data={listensData} options={chartOptions} />
             </CardContent>
@@ -114,7 +114,7 @@ const chartOptions = {
     y: {
       title: {
         display: true,
-        text: 'Nombre d\'écoutes',
+        text: 'number of listeners',
       },
     },
   },
