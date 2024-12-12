@@ -14,8 +14,8 @@ import HomePage from '../pages/home/home';
 import MusicPage from '../pages/music/music';
 import PlaylistPage from '../pages/playlist/myplaylist';
 import ArtistPage from '../pages/artist/artist';
-import ArtistDashboard from './MusicChart/chart'
-import Profile from '../pages/profile/viewProfile'
+import ArtistDashboard from './MusicChart/chart';
+import Profile from '../pages/profile/viewProfile';
 import ArtistProfile from '../components/ArtistCard/profile.jsx';
 
 
@@ -74,7 +74,7 @@ export default function DashboardLayoutBasic(props) {
             {router.pathname === '/home' && <HomePage />}
             {router.pathname === '/music' && <MusicPage />}
             {router.pathname === '/playlist' && <PlaylistPage />}
-            {router.pathname === '/Artist' && <ArtistPage />}
+            {router.pathname === '/artist' && <ArtistPage />}
             {router.pathname ==='/dashboard' && <ArtistDashboard/>}
             {router.pathname === '/profile/view' && <Profile/>}
             {router.pathname === '/artist/profile/view' && <Profile/>}
