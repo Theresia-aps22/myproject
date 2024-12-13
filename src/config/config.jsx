@@ -21,11 +21,11 @@ const NAVIGATION = [
     title: 'Home',
     icon: <HomeIcon />,
   },
-  {
-    segment: 'dashboard',
-    title: 'Dashboard',
-    icon: <BarChartIcon />,
-  },
+  // {
+  //   segment: 'dashboard',
+  //   title: 'Dashboard',
+  //   icon: <BarChartIcon />,
+  // },
   {
     segment: 'playlist',
     title: 'My Playlist',

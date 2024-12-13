@@ -3,6 +3,10 @@ import * as React from 'react';
 import { Container, Typography, Card } from '@mui/material';
 import { styled } from '@mui/system';
 import SongCards from  '../../components/RecentPLay/recentPlayCard.jsx'
+import FavoriteSongsCard from '../../components/songAction/favoriteSong'
+import SavedSongsCard from '../../components/songAction/savedSong.jsx'
+import FavoritesProvider from '../../context/favoriteSongContext.jsx';
+
 
 import Illustration from '../../utils/images/music_illustration.png'
 
@@ -21,7 +25,10 @@ export default function HomePage() {
       <Card>
         <img alt="Music" src={Illustration} width="30%"/>
       </Card>
-      <SongCards/>
+      <FavoritesProvider>
+        <FavoriteSongsCard/>
+      </FavoritesProvider>
+      <SavedSongsCard/>
     </StyledContainer>
   );
 }

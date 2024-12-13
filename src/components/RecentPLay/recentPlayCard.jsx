@@ -99,10 +99,10 @@ function FavoriteSongsCard() {
         <Typography variant="h6" gutterBottom sx={titleStyle}>
           ❤️ Chansons adorées
         </Typography>
+        {/* <MusicCard />
         <MusicCard />
         <MusicCard />
-        <MusicCard />
-        <MusicCard />
+        <MusicCard /> */}
       </CardContent>
     </Card>
   );
@@ -139,10 +139,10 @@ function RecentlyPlayedCard() {
         <Typography variant="h6" gutterBottom sx={titleStyle}>
           🎧 Chansons récemment écoutées
         </Typography>
+        {/* <MusicCard />
         <MusicCard />
         <MusicCard />
-        <MusicCard />
-        <MusicCard />
+        <MusicCard /> */}
       </CardContent>
     </Card>
   );
