@@ -1,80 +1,124 @@
-import React from 'react';
-import { MDBCol, MDBContainer, MDBRow, MDBCard, MDBCardText, MDBCardBody, MDBCardImage, MDBBtn, MDBTypography } from 'mdb-react-ui-kit';
+import React, { useState, useEffect } from 'react';
+import {
+  Box,
+  Typography,
+  IconButton,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+  Avatar,
+  Card,
+  CardContent,
+} from '@mui/material';
+import EditIcon from '@mui/icons-material/Edit';
+import UserImage from '../../utils/images/classic.jpg';
 
-export default function EditButton() {
+const Profile = () => {
+  // Initialisation des informations utilisateur
+  const [userInfo, setUserInfo] = useState({
+    name: 'John Doe',
+    nickname: 'johndoe123',
+    email: 'johndoe@example.com',
+    followers: 1500,
+    following: 200,
+    profileImage: UserImage,
+  });
+
+  const [editedInfo, setEditedInfo] = useState({ ...userInfo });
+  const [openProfileDialog, setOpenProfileDialog] = useState(false);
+
+  // Ouvre le dialogue pour modifier le profil
+  const handleProfileDialogOpen = () => {
+    setEditedInfo(userInfo);
+    setOpenProfileDialog(true);
+  };
+
+  // Ferme le dialogue sans enregistrer les modifications
+  const handleProfileDialogClose = () => {
+    setOpenProfileDialog(false);
+  };
+
+  // Enregistre les modifications du profil
+  const handleEditProfile = () => {
+    setUserInfo(editedInfo);
+    setOpenProfileDialog(false);
+  };
+
   return (
-    <div className="gradient-custom-2" style={{ backgroundColor: '#9de2ff' }}>
-      <MDBContainer className="py-5 h-100">
-        <MDBRow className="justify-content-center align-items-center h-100">
-          <MDBCol lg="9" xl="7">
-            <MDBCard>
-              <div className="rounded-top text-white d-flex flex-row" style={{ backgroundColor: '#000', height: '200px' }}>
-                <div className="ms-4 mt-5 d-flex flex-column" style={{ width: '150px' }}>
-                  <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                    alt="Generic placeholder image" className="mt-4 mb-2 img-thumbnail" fluid style={{ width: '150px', zIndex: '1' }} />
-                  <MDBBtn outline color="dark" style={{height: '36px', overflow: 'visible'}}>
-                    Edit profile
-                  </MDBBtn>
-                </div>
-                <div className="ms-3" style={{ marginTop: '130px' }}>
-                  <MDBTypography tag="h5">Andy Horwitz</MDBTypography>
-                  <MDBCardText>New York</MDBCardText>
-                </div>
-              </div>
-              <div className="p-4 text-black" style={{ backgroundColor: '#f8f9fa' }}>
-                <div className="d-flex justify-content-end text-center py-1">
-                  <div>
-                    <MDBCardText className="mb-1 h5">253</MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">Photos</MDBCardText>
-                  </div>
-                  <div className="px-3">
-                    <MDBCardText className="mb-1 h5">1026</MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">Followers</MDBCardText>
-                  </div>
-                  <div>
-                    <MDBCardText className="mb-1 h5">478</MDBCardText>
-                    <MDBCardText className="small text-muted mb-0">Following</MDBCardText>
-                  </div>
-                </div>
-              </div>
-              <MDBCardBody className="text-black p-4">
-                <div className="mb-5">
-                  <p className="lead fw-normal mb-1">About</p>
-                  <div className="p-4" style={{ backgroundColor: '#f8f9fa' }}>
-                    <MDBCardText className="font-italic mb-1">Web Developer</MDBCardText>
-                    <MDBCardText className="font-italic mb-1">Lives in New York</MDBCardText>
-                    <MDBCardText className="font-italic mb-0">Photographer</MDBCardText>
-                  </div>
-                </div>
-                <div className="d-flex justify-content-between align-items-center mb-4">
-                  <MDBCardText className="lead fw-normal mb-0">Recent photos</MDBCardText>
-                  <MDBCardText className="mb-0"><a href="#!" className="text-muted">Show all</a></MDBCardText>
-                </div>
-                <MDBRow>
-                  <MDBCol className="mb-2">
-                    <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                      alt="image 1" className="w-100 rounded-3" />
-                  </MDBCol>
-                  <MDBCol className="mb-2">
-                    <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                      alt="image 1" className="w-100 rounded-3" />
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow className="g-2">
-                  <MDBCol className="mb-2">
-                    <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                      alt="image 1" className="w-100 rounded-3" />
-                  </MDBCol>
-                  <MDBCol className="mb-2">
-                    <MDBCardImage src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                      alt="image 1" className="w-100 rounded-3" />
-                  </MDBCol>
-                </MDBRow>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
-    </div>
+    <Box sx={{ maxWidth: '900px', margin: '0 auto', padding: '20px' }}>
+      {/* Section Profil Utilisateur */}
+      <Card sx={{ marginBottom: 3, padding: 3 }}>
+        <CardContent sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <Box sx={{ display: 'flex' }}>
+            <Avatar
+              alt="User Profile"
+              src={userInfo.profileImage}
+              sx={{ width: 100, height: 100, marginRight: 2 }}
+            />
+            <Box>
+              <Typography variant="h4" gutterBottom>
+                {userInfo.name}
+              </Typography>
+              <Typography variant="body1">{userInfo.nickname}</Typography>
+              <Typography variant="body1">{userInfo.email}</Typography>
+              <Typography variant="body1">
+                {userInfo.followers} abonnés | {userInfo.following} suivis
+              </Typography>
+            </Box>
+          </Box>
+          <IconButton onClick={handleProfileDialogOpen}>
+            <EditIcon />
+          </IconButton>
+        </CardContent>
+      </Card>
+
+      {/* Dialogue pour la modification du profil */}
+      <Dialog open={openProfileDialog} onClose={handleProfileDialogClose}>
+        <DialogTitle>Modifier le profil</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Nom"
+            fullWidth
+            value={editedInfo.name}
+            onChange={(e) => setEditedInfo({ ...editedInfo, name: e.target.value })}
+          />
+          <TextField
+            margin="dense"
+            label="Surnom"
+            fullWidth
+            value={editedInfo.nickname}
+            onChange={(e) => setEditedInfo({ ...editedInfo, nickname: e.target.value })}
+          />
+          <TextField
+            margin="dense"
+            label="Email"
+            fullWidth
+            value={editedInfo.email}
+            onChange={(e) => setEditedInfo({ ...editedInfo, email: e.target.value })}
+          />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={(e) => setEditedInfo({ ...editedInfo, profileImage: URL.createObjectURL(e.target.files[0]) })}
+            style={{ marginTop: 10 }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleProfileDialogClose} color="primary">
+            Annuler
+          </Button>
+          <Button onClick={handleEditProfile} color="primary">
+            Sauvegarder
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
   );
-}
+};
+
+export default Profile;

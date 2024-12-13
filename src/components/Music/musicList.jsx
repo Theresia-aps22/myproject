@@ -1,6 +1,7 @@
-import React from "react";
+import React, {useState} from "react";
 import { Container, Box, Card, Typography } from "@mui/material";
 import MusicCard from "./musicCard";
+import Recherche from '../recherche/recherche.jsx'
 
 export default function MusicCardListForm() {
   // Styles pour les cartes
@@ -13,6 +14,16 @@ export default function MusicCardListForm() {
     borderRadius: "16px", // Coins arrondis pour un design moderne
     boxShadow: "0 4px 10px rgba(0, 0, 0, 0.2)", // Ombre douce
   };
+    const musicData = ["Artiste", ""]
+    const [rechercheValue, setRechercheValue] = useState('');
+    const [categorieRecherche, setCategorieRecherche] = useState('');
+  
+      //filtre selon le message
+      // const filteredData = musicData.filter(item =>
+      //     item.nom.toLowerCase().includes(rechercheValue.toLowerCase()) &&
+      //     (categorieRecherche === '' || item.categorie.toLowerCase() === categorieRecherche.toLowerCase())
+      // );
+  
 
   return (
     <Container
@@ -27,6 +38,11 @@ export default function MusicCardListForm() {
         boxShadow: "0 8px 16px rgba(0, 0, 0, 0.3)", // Ombre autour du conteneur principal
       }}
     >
+      
+      {/* <Recherche
+          rechercheValue={rechercheValue}
+          setRechercheValue={setRechercheValue}
+      /> */}
       <Typography
         variant="h4"
         sx={{

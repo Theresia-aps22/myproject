@@ -74,8 +74,13 @@ export default function DashboardLayoutBasic(props) {
             {router.pathname === '/home' && <HomePage />}
             {router.pathname === '/music' && <MusicPage />}
             {router.pathname === '/playlist' && <PlaylistPage />}
+<<<<<<< HEAD
+            {router.pathname === '/Artist' && <ArtistPage />}
+            {/* {router.pathname ==='/dashboard' && <ArtistDashboard/>} */}
+=======
             {router.pathname === '/artist' && <ArtistPage />}
             {router.pathname ==='/dashboard' && <ArtistDashboard/>}
+>>>>>>> 2af71ee548e3a6c0ffcfa2ce6d82318e7f11cad0
             {router.pathname === '/profile/view' && <Profile/>}
             {router.pathname === '/artist/profile/view' && <Profile/>}
           </Grid>
