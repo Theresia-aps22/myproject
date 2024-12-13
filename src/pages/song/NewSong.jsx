@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
+import { db, addDoc, getDocs, collection, query, where } from '../../firebaseConfig'; // Importez Firestore
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
@@ -19,6 +20,7 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow'; // Import Play icon
 import PauseIcon from '@mui/icons-material/Pause'; // Import Pause icon
 import "../../utils/styles/likedSong.css";
 import { MusicNote } from '@mui/icons-material';
+import CircularProgress from '@mui/material/CircularProgress'; // Import CircularProgress
 
 const darkTheme = createTheme({
   palette: {
@@ -34,17 +36,38 @@ export default function NewSong() {
   const [showSongSelection, setShowSongSelection] = useState(false);
   const [selectedSongs, setSelectedSongs] = useState([]);
   const [playingSong, setPlayingSong] = useState(null);
+  const [loading, setLoading] = useState(true);  // Ajout de l'état de chargement
 
   const searchParams = new URLSearchParams(location.search);
   const playlistName = searchParams.get("name") || `Playlist ${playlistId}`;
 
+  // Récupérer les chansons de la playlist depuis Firestore
   useEffect(() => {
+    const fetchPlaylistSongs = async () => {
+      const q = query(collection(db, 'playlists'), where('playlistId', '==', playlistId));
+      const querySnapshot = await getDocs(q);
+      const songsArray = [];
+      querySnapshot.forEach((doc) => {
+        songsArray.push(doc.data());
+      });
+      setSongs(songsArray);
+    };
+
+    fetchPlaylistSongs();
+  }, [playlistId]);
+
+  useEffect(() => {
+    setLoading(true);  // On commence par définir le chargement à true
     fetch('https://api.jamendo.com/v3.0/tracks?client_id=08f37671')
       .then(response => response.json())
       .then(data => {
         setJamendoSongs(data.results);
+        setLoading(false);  // Une fois les données chargées, on arrête le chargement
       })
-      .catch(error => console.error("Erreur lors de la récupération des chansons :", error));
+      .catch(error => {
+        console.error("Erreur lors de la récupération des chansons :", error);
+        setLoading(false);  // On arrête le chargement même en cas d'erreur
+      });
   }, []);
 
   const handleAddSongClick = () => {
@@ -59,8 +82,22 @@ export default function NewSong() {
     }
   };
 
-  const handleAddSelectedSongs = () => {
+  const handleAddSelectedSongs = async () => {
+    // Ajouter les chansons sélectionnées à Firestore
     const newSongs = selectedSongs.filter((song) => !songs.some((existingSong) => existingSong.id === song.id));
+    
+    // Ajout de nouvelles chansons dans Firestore
+    newSongs.forEach(async (song) => {
+      await addDoc(collection(db, 'playlists'), {
+        playlistId: playlistId,
+        songId: song.id,
+        name: song.name,
+        artist: song.artist_name,
+        album_image: song.album_image,
+        audio: song.audio,
+      });
+    });
+
     setSongs([...songs, ...newSongs]);
     setSelectedSongs([]);
     setShowSongSelection(false);
@@ -72,9 +109,9 @@ export default function NewSong() {
 
   const handlePlayPause = (song) => {
     if (playingSong === song) {
-      setPlayingSong(null); // Pause if the song is already playing
+      setPlayingSong(null); // Pause si la chanson est déjà en cours
     } else {
-      setPlayingSong(song); // Play the selected song
+      setPlayingSong(song); // Lecture de la chanson sélectionnée
     }
   };
 
@@ -153,17 +190,23 @@ export default function NewSong() {
           <DialogTitle>Select Jamendo Songs to Add</DialogTitle>
           <DialogContent>
             <Box component="ul" sx={{ listStyleType: 'none', padding: 0 }}>
-              {jamendoSongs.map((jamendoSong) => (
-                <Box key={jamendoSong.id} display="flex" alignItems="center" sx={{ mb: 1 }}>
-                  <Checkbox
-                    checked={selectedSongs.includes(jamendoSong)}
-                    onChange={() => handleCheckboxChange(jamendoSong)}
-                    color="primary"
-                    disabled={songs.some((existingSong) => existingSong.id === jamendoSong.id)}
-                  />
-                  <Typography variant="body1" noWrap>{jamendoSong.name} by {jamendoSong.artist_name}</Typography>
+              {loading ? (  // Afficher le loading pendant que les chansons sont en chargement
+                <Box display="flex" justifyContent="center" alignItems="center" sx={{ p: 2 }}>
+                  <CircularProgress color="primary" />
                 </Box>
-              ))}
+              ) : (
+                jamendoSongs.map((jamendoSong) => (
+                  <Box key={jamendoSong.id} display="flex" alignItems="center" sx={{ mb: 1 }}>
+                    <Checkbox
+                      checked={selectedSongs.includes(jamendoSong)}
+                      onChange={() => handleCheckboxChange(jamendoSong)}
+                      color="primary"
+                      disabled={songs.some((existingSong) => existingSong.id === jamendoSong.id)}
+                    />
+                    <Typography variant="body1" noWrap>{jamendoSong.name} by {jamendoSong.artist_name}</Typography>
+                  </Box>
+                ))
+              )}
             </Box>
           </DialogContent>
           <DialogActions>
